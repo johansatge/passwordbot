@@ -4,7 +4,7 @@ footer
     width       : 400px;
     left        : 50%;
     margin      : 10px 0 0 -200px;
-    color       : #cccccc;
+    color       : $color-footer;
     font-size   : 11px;
     font-family : Open Sans, sans-serif;
     text-align  : center;
@@ -12,7 +12,7 @@ footer
     a,
     a:visited
     {
-        color           : #cccccc;
+        color           : $color-footer;
         text-decoration : underline;
     }
 }
