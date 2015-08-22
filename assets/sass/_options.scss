@@ -6,17 +6,17 @@
 
     label
     {
-        cursor                 : pointer;
-        border-radius          : 5px 5px 0 0;
-        display                : block;
-        width                  : 100%;
-        box-sizing             : border-box;
-        border-bottom          : 1px dotted #dddddd;
-        padding                : 10px 5px 10px 5px;
-        font-size              : 14px;
-        color                  : #8d8d8d;
-        font-family            : Open Sans, sans-serif;
-        font-weight            : 400;
+        cursor        : pointer;
+        border-radius : 5px 5px 0 0;
+        display       : block;
+        width         : 100%;
+        box-sizing    : border-box;
+        border-bottom : 1px dotted #dddddd;
+        padding       : 10px 5px 10px 5px;
+        font-size     : 14px;
+        color         : #8d8d8d;
+        font-family   : Open Sans, sans-serif;
+        font-weight   : 400;
 
         &:last-child
         {
@@ -24,8 +24,9 @@
         }
     }
 
-    input[type=checkbox]
+    input[type="checkbox"]
     {
+        outline            : 0;
         position           : relative;
         -webkit-appearance : none;
         float              : left;
