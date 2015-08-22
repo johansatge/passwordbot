@@ -1,0 +1,6 @@
+{
+  "name": "",
+  "scripts": {
+    "sass": "cd assets && compass watch sass/styles.scss"
+  }
+}
