@@ -8,7 +8,8 @@ html, body, main, header, section, input, button, label
 
 body
 {
-    background : #ffffff;
+    background             : #ffffff;
+    -webkit-font-smoothing : antialiased;
 }
 
 main
