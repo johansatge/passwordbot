@@ -1,8 +1,9 @@
 header
 {
-    position : relative;
-    margin   : 150px 0 0 0;
-    padding  : 50px 0 30px 0;
+    position      : relative;
+    width         : 300px;
+    left          : 50%;
+    margin        : 200px 0 30px -150px;
 
     h1
     {
@@ -30,7 +31,7 @@ header
         position      : absolute;
         top           : -35px;
         left          : 50%;
-        margin        : 0 0 0 -35px;
+        margin        : -50px 0 0 -35px;
         width         : 70px;
         height        : 70px;
         background    : linear-gradient(to bottom, #48abe5, #068fde);

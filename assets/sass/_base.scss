@@ -15,11 +15,12 @@ html
 
 main
 {
-    width    : 400px;
-    position : relative;
-    left     : 50%;
-    margin   : 150px 0 0 -200px;
+    width         : 400px;
+    position      : relative;
+    left          : 50%;
+    margin        : 0 0 0 -200px;
     border-radius : 5px;
+    overflow      : hidden;
 
     section
     {
@@ -29,8 +30,10 @@ main
 
 footer
 {
-    width       : 100%;
-    margin      : 10px 0 0 0;
+    width       : 300px;
+    position    : relative;
+    left        : 50%;
+    margin      : 10px 0 0 -150px;
     color       : #cccccc;
     font-size   : 11px;
     font-family : Open Sans, sans-serif;
