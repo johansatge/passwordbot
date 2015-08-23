@@ -3,17 +3,34 @@
 
     padding : 0 20px 20px 20px;
 
+    .bar
+    {
+        border        : 1px solid #e6e7eb;
+        border-top    : 0;
+        border-radius : 0 0 5px 5px;
+        padding       : 2px;
+
+        .content
+        {
+            background    : #47aae5;
+            height        : 3px;
+            border-radius : 3px;
+            transition    : width 150ms;
+        }
+    }
+
     table
     {
         width         : 100%;
         border        : 1px solid #e6e7eb;
-        border-radius : 5px;
+        border-radius : 5px 5px 0 0;
         overflow      : hidden;
 
         tr
         {
             td
             {
+                position      : relative;
                 font-size     : 11px;
                 color         : #868686;
                 font-family   : Open Sans, sans-serif;
@@ -41,6 +58,25 @@
                 border-bottom : 0;
             }
         }
+
+        a,
+        a:visited
+        {
+            opacity         : 0.3;
+            position        : absolute;
+            top             : 5px;
+            right           : 8px;
+            font-size       : 16px;
+            color           : #868686;
+            text-decoration : none;
+            transition      : opacity 150ms;
+
+            &:hover
+            {
+                opacity : 1;
+            }
+        }
+
     }
 
 }

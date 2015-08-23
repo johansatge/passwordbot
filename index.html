@@ -6,7 +6,7 @@
         <link href="assets/css/styles.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="icon" type="image/png" href="assets/css/images/favicon.png?v1">
+        <link rel="icon" type="image/png" href="assets/css/images/favicon.png">
         <meta name="viewport" content="width=device-width">
     </head>
     <body>
@@ -51,7 +51,19 @@
                         <td>Special characters</td>
                         <td class="js-strength-specialchars">0</td>
                     </tr>
+                    <tr>
+                        <td>
+                            Overall score
+                            <a href="@todo">
+                                <i class="fa fa-question-circle"></i>
+                            </a>
+                        </td>
+                        <td class="js-strength-score">@todo</td>
+                    </tr>
                 </table>
+                <div class="bar">
+                    <div class="content js-strength-score-bar" style="width: 0"></div>
+                </div>
             </section>
             <section class="options">
                 <label>
@@ -80,6 +92,7 @@
             Project available on <a href="https://github.com/johansatge/passwordbot">Github</a>
         </footer>
         <script src="assets/js/generator.js"></script>
+        <script src="assets/js/score.js"></script>
         <script src="assets/js/ui.js"></script>
         <script>
             window.onload = UI.init;

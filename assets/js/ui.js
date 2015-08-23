@@ -22,6 +22,8 @@
         dom.strengthUppercase = document.querySelector('.js-strength-uppercase');
         dom.strengthDigits = document.querySelector('.js-strength-digits');
         dom.strengthSpecialChars = document.querySelector('.js-strength-specialchars');
+        dom.strengthScore = document.querySelector('.js-strength-score');
+        dom.strengthScoreBar = document.querySelector('.js-strength-score-bar');
     };
 
     var _initEvents = function()
@@ -34,11 +36,14 @@
     var _onUpdatePassword = function()
     {
         var data = Generator.getPasswordInformations(dom.input.value);
+        var score = Score.calculatePasswordScore(dom.input.value);
         dom.strengthLength.innerHTML = data.length;
         dom.strengthLowercase.innerHTML = data.lowercase;
         dom.strengthUppercase.innerHTML = data.uppercase;
         dom.strengthDigits.innerHTML = data.digits;
         dom.strengthSpecialChars.innerHTML = data.special;
+        dom.strengthScore.innerHTML = score;
+        dom.strengthScoreBar.style.width = score + '%';
     };
 
     var _onGeneratePassword = function()
