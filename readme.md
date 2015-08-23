@@ -1,6 +1,6 @@
 ![PasswordBot](logo.png)
 
-Simple password checker & generator.
+Simple password checker & generator - [passwordbotapp.com](http://passwordbotapp.com).
 
 ---
 
