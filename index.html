@@ -59,12 +59,16 @@
             </section>
             <section class="options">
                 <label>
-                    <input name="chars" type="text" value="12" class="js-option" checked>
+                    <input name="length" type="text" value="12" class="js-option" checked>
                     Characters
                 </label>
                 <label>
-                    <input name="include_letters" type="checkbox" class="js-option" checked>
-                    Include letters
+                    <input name="include_lowercase" type="checkbox" class="js-option" checked>
+                    Include lowercase letters
+                </label>
+                <label>
+                    <input name="include_uppercase" type="checkbox" class="js-option" checked>
+                    Include uppercase letters
                 </label>
                 <label>
                     <input name="include_digits" type="checkbox" class="js-option" checked>
@@ -79,9 +83,10 @@
         <footer>
             Project available on <a href="https://github.com/johansatge/passwordbot">Github</a>
         </footer>
-        <script src="assets/js/bot.js"></script>
+        <script src="assets/js/generator.js"></script>
+        <script src="assets/js/ui.js"></script>
         <script>
-            window.onload = Bot.init;
+            window.onload = UI.init;
         </script>
     </body>
 </html>

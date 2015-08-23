@@ -18,7 +18,6 @@
         dom.generateButton = document.querySelector('.js-generate');
         dom.copyButton = document.querySelector('.js-copy');
         dom.options = document.querySelectorAll('.js-option');
-
         dom.strengthLength = document.querySelector('.js-strength-length');
         dom.strengthLowercase = document.querySelector('.js-strength-lowercase');
         dom.strengthUppercase = document.querySelector('.js-strength-uppercase');
@@ -36,36 +35,38 @@
 
     var _onUpdatePassword = function()
     {
-        var password = dom.input.value;
-
-        dom.strengthLength.innerHTML = password.length;
-        dom.strengthLowercase.innerHTML = _getMatchesCount(/[a-z]/g, password);
-        dom.strengthUppercase.innerHTML = _getMatchesCount(/[A-Z]/g, password);
-        dom.strengthDigits.innerHTML = _getMatchesCount(/[0-9]/g, password);
-        dom.strengthSpecialChars.innerHTML = _getMatchesCount(/[^a-zA-Z0-9]/g, password);
-
-
-        console.log(password);
-
-
+        var data = Generator.getPasswordInformations(dom.input.value);
+        dom.strengthLength.innerHTML = data.length;
+        dom.strengthLowercase.innerHTML = data.lowercase;
+        dom.strengthUppercase.innerHTML = data.uppercase;
+        dom.strengthDigits.innerHTML = data.digits;
+        dom.strengthSpecialChars.innerHTML = data.special;
     };
 
-    var _onGeneratePassword = function(evt)
+    var _onGeneratePassword = function()
     {
-        console.log('@todo generate');
+        var options = _parseOptions();
+        dom.input.value = Generator.generatePassword(options);
+        dom.input.dispatchEvent(new Event('change'));
+        dom.input.focus();
     };
 
-    var _onCopyPassword = function(evt)
+    var _onCopyPassword = function()
     {
         console.log('@todo copy');
     };
 
-    var _getMatchesCount = function(regex, subject)
+    var _parseOptions = function()
     {
-        var matches = subject.match(regex);
-        return matches !== null ? matches.length : 0;
+        var options = {};
+        for (var index = 0; index < dom.options.length; index += 1)
+        {
+            var input = dom.options[index];
+            options[input.getAttribute('name')] = input.getAttribute('type') === 'checkbox' ? input.checked : input.value;
+        }
+        return options;
     };
 
-    window.Bot = module;
+    window.UI = module;
 
 })(window, document);
