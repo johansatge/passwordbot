@@ -18,6 +18,12 @@
         dom.generateButton = document.querySelector('.js-generate');
         dom.copyButton = document.querySelector('.js-copy');
         dom.options = document.querySelectorAll('.js-option');
+
+        dom.strengthLength = document.querySelector('.js-strength-length');
+        dom.strengthLowercase = document.querySelector('.js-strength-lowercase');
+        dom.strengthUppercase = document.querySelector('.js-strength-uppercase');
+        dom.strengthDigits = document.querySelector('.js-strength-digits');
+        dom.strengthSpecialChars = document.querySelector('.js-strength-specialchars');
     };
 
     var _initEvents = function()
@@ -28,9 +34,20 @@
         dom.copyButton.addEventListener('click', _onCopyPassword);
     };
 
-    var _onUpdatePassword = function(evt)
+    var _onUpdatePassword = function()
     {
-        console.log('@todo update strength checker');
+        var password = dom.input.value;
+
+        dom.strengthLength.innerHTML = password.length;
+        dom.strengthLowercase.innerHTML = _getMatchesCount(/[a-z]/g, password);
+        dom.strengthUppercase.innerHTML = _getMatchesCount(/[A-Z]/g, password);
+        dom.strengthDigits.innerHTML = _getMatchesCount(/[0-9]/g, password);
+        dom.strengthSpecialChars.innerHTML = _getMatchesCount(/[^a-zA-Z0-9]/g, password);
+
+
+        console.log(password);
+
+
     };
 
     var _onGeneratePassword = function(evt)
@@ -41,6 +58,12 @@
     var _onCopyPassword = function(evt)
     {
         console.log('@todo copy');
+    };
+
+    var _getMatchesCount = function(regex, subject)
+    {
+        var matches = subject.match(regex);
+        return matches !== null ? matches.length : 0;
     };
 
     window.Bot = module;
