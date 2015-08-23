@@ -16,7 +16,6 @@
     {
         dom.input = document.querySelector('.js-input');
         dom.generateButton = document.querySelector('.js-generate');
-        dom.copyButton = document.querySelector('.js-copy');
         dom.options = document.querySelectorAll('.js-option');
         dom.strengthLength = document.querySelector('.js-strength-length');
         dom.strengthLowercase = document.querySelector('.js-strength-lowercase');
@@ -30,7 +29,6 @@
         dom.input.addEventListener('change', _onUpdatePassword);
         dom.input.addEventListener('keyup', _onUpdatePassword);
         dom.generateButton.addEventListener('click', _onGeneratePassword);
-        dom.copyButton.addEventListener('click', _onCopyPassword);
     };
 
     var _onUpdatePassword = function()
@@ -48,13 +46,7 @@
         var options = _parseOptions();
         dom.input.value = Generator.generatePassword(options);
         dom.input.dispatchEvent(new Event('change'));
-        dom.input.focus();
-    };
-
-    var _onCopyPassword = function()
-    {
         dom.input.select();
-        document.execCommand('copy');
     };
 
     var _parseOptions = function()
