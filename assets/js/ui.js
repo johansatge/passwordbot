@@ -53,7 +53,8 @@
 
     var _onCopyPassword = function()
     {
-        console.log('@todo copy');
+        dom.input.select();
+        document.execCommand('copy');
     };
 
     var _parseOptions = function()
