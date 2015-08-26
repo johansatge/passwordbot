@@ -8,6 +8,7 @@ Simple password checker & generator - [passwordbotapp.com](http://passwordbotapp
 * [Score calculation](#score-calculation)
 * [Changelog](#changelog)
 * [License](#license)
+* [Credits](#credits)
 
 ## Why
 
@@ -42,3 +43,6 @@ It is a basic way to calculate the password strength, but for now there are no u
 
 This project is released under the [MIT License](license).
 
+## Credits
+
+* [cookie.js](https://github.com/js-coder/cookie.js)
