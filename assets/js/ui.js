@@ -1,22 +1,26 @@
-(function(window, document)
+(function(window, document, cookie)
 {
 
     'use strict';
 
     var module = {};
     var dom = {};
+    var cookie_prefix = 'pwb_';
 
     module.init = function()
     {
         _initDOM();
         _initEvents();
+        _initOptions();
     };
 
     var _initDOM = function()
     {
         dom.input = document.querySelector('.js-input');
         dom.generateButton = document.querySelector('.js-generate');
+        dom.saveButton = document.querySelector('.js-save');
         dom.options = document.querySelectorAll('.js-option');
+        dom.saveMessage = document.querySelector('.js-save-message');
         dom.strengthLength = document.querySelector('.js-strength-length');
         dom.strengthLowercase = document.querySelector('.js-strength-lowercase');
         dom.strengthUppercase = document.querySelector('.js-strength-uppercase');
@@ -31,6 +35,34 @@
         dom.input.addEventListener('change', _onUpdatePassword);
         dom.input.addEventListener('keyup', _onUpdatePassword);
         dom.generateButton.addEventListener('click', _onGeneratePassword);
+    };
+
+    var _initOptions = function()
+    {
+        if (!cookie.enabled)
+        {
+            dom.saveButton.parentNode.removeChild(dom.saveButton);
+            dom.saveMessage.parentNode.removeChild(dom.saveMessage);
+            return;
+        }
+        var user_value;
+        var input;
+        var loaded = false;
+        for (var index = 0; index < dom.options.length; index += 1)
+        {
+            input = dom.options[index];
+            user_value = cookie.get(cookie_prefix + input.getAttribute('name'), false);
+            if (typeof user_value !== 'undefined')
+            {
+                input.getAttribute('type') === 'checkbox' ? (input.checked = user_value === '1') : (input.value = user_value);
+                loaded = true;
+            }
+        }
+        if (loaded)
+        {
+            dom.saveMessage.innerHTML = dom.saveMessage.getAttribute('data-msg-load');
+        }
+        dom.saveButton.addEventListener('click', _onSaveOptions);
     };
 
     var _onUpdatePassword = function()
@@ -54,17 +86,27 @@
         dom.input.select();
     };
 
+    var _onSaveOptions = function()
+    {
+        var options = _parseOptions();
+        for (var option in options)
+        {
+            cookie.set(cookie_prefix + option, options[option]);
+        }
+        dom.saveMessage.innerHTML = dom.saveMessage.getAttribute('data-msg-save');
+    };
+
     var _parseOptions = function()
     {
         var options = {};
         for (var index = 0; index < dom.options.length; index += 1)
         {
             var input = dom.options[index];
-            options[input.getAttribute('name')] = input.getAttribute('type') === 'checkbox' ? input.checked : input.value;
+            options[input.getAttribute('name')] = input.getAttribute('type') === 'checkbox' ? (input.checked ? 1 : 0) : input.value;
         }
         return options;
     };
 
     window.UI = module;
 
-})(window, document);
+})(window, document, cookie);

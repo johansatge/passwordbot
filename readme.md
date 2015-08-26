@@ -37,6 +37,7 @@ It is a basic way to calculate the password strength, but for now there are no u
 
 | Version | Date | Notes |
 | --- | --- | --- |
+| `1.1.0` | August 26, 2015 | Initial version |
 | `1.0.0` | August 23, 2015 | Initial version |
 
 ## License
