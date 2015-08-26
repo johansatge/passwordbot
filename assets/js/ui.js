@@ -6,6 +6,7 @@
     var module = {};
     var dom = {};
     var cookie_prefix = 'pwb_';
+    var cookie_duration = 365;
 
     module.init = function()
     {
@@ -91,7 +92,7 @@
         var options = _parseOptions();
         for (var option in options)
         {
-            cookie.set(cookie_prefix + option, options[option]);
+            cookie.set(cookie_prefix + option, options[option], {expires: cookie_duration});
         }
         dom.saveMessage.innerHTML = dom.saveMessage.getAttribute('data-msg-save');
     };
