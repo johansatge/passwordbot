@@ -16,6 +16,7 @@ I wanted to make an online password generator, which would match those needs:
 * Easy to use
 * Minimalistic UI
 * No tracking at all
+* No ads
 * Understandable [generator function](assets/js/generator.js)
 
 ## Score calculation
