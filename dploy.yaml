@@ -1,0 +1,11 @@
+ocean:
+    scheme: "sftp"
+    host: "passwordbotapp.com"
+    user: "johan"
+    check: false
+    path:
+        remote: "/var/www/passwordbotapp.com"
+    privateKey: "~/.ssh/digital_ocean_johan"
+    publicKey: "~/.ssh/digital_ocean_johan.pub"
+    branch: "master"
+    exclude: ["assets/sass/**/*", "assets/config.rb", "dploy.yaml", "readme.md", "package.json", "logo.png", "license"]
