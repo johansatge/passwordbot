@@ -15,29 +15,26 @@ html
 
 main
 {
-    width         : 400px;
-    position      : relative;
-    left          : 50%;
-    margin        : 0 0 0 -200px;
-    border-radius : 5px;
-    overflow      : hidden;
-
-    section
-    {
-        background : #ffffff;
-    }
+    max-width : 400px;
+    position  : relative;
+    margin    : 0 auto 0 auto;
+    padding   : 0 20px 0 20px;
 }
 
 footer
 {
-    width       : 400px;
+    max-width   : 400px;
     position    : relative;
-    left        : 50%;
-    margin      : 10px 0 100px -200px;
+    margin      : 10px auto 100px auto;
+    padding     : 0 20px 0 20px;
     color       : #cccccc;
     font-size   : 11px;
     font-family : Open Sans, sans-serif;
     text-align  : right;
+
+    @media screen and (max-width : 600px) {
+        margin-bottom : 30px;
+    }
 
     button
     {

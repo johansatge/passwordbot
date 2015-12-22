@@ -1,9 +1,13 @@
 header
 {
-    position      : relative;
-    width         : 300px;
-    left          : 50%;
-    margin        : 150px 0 30px -150px;
+    position : relative;
+    width    : 300px;
+    left     : 50%;
+    margin   : 150px 0 30px -150px;
+
+    @media screen and (max-width : 600px) {
+        margin-top : 120px;
+    }
 
     h1
     {
@@ -14,6 +18,11 @@ header
         font-family : Open Sans, sans-serif;
         font-weight : 300;
         margin      : 0 0 5px 0;
+
+        @media screen and (max-width : 600px) {
+            font-size   : 28px;
+            line-height : 28px;
+        }
     }
 
     h2
@@ -39,10 +48,20 @@ header
         text-align    : center;
         font-size     : 32px;
 
+        @media screen and (max-width : 600px) {
+            width  : 60px;
+            height : 60px;
+            margin : -40px 0 0 -30px;
+        }
+
         i
         {
             margin : 20px 0 0 0;
             color  : #ffffff;
+
+            @media screen and (max-width : 600px) {
+                margin : 15px 0 0 0;
+            }
         }
     }
 }

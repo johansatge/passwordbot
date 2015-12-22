@@ -1,7 +1,9 @@
 .options
 {
-    background : #f1f2f7;
-    border-top : 1px solid #e6e7eb;
+    background    : #f1f2f7;
+    border-top    : 1px solid #e6e7eb;
+    border-radius : 0 0 5px 5px;
+    overflow      : hidden;
 
     label
     {
@@ -13,6 +15,10 @@
         color         : #868686;
         font-family   : Open Sans, sans-serif;
         font-weight   : 400;
+
+        @media screen and (max-width : 600px) {
+            font-size : 11px;
+        }
 
         &:last-child
         {
@@ -46,6 +52,10 @@
         width              : 18px;
         height             : 18px;
         cursor             : pointer;
+
+        @media screen and (max-width : 600px) {
+            margin-top : -1px;
+        }
 
         &:checked:before
         {
