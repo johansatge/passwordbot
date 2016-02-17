@@ -6,6 +6,7 @@ Simple password checker & generator - [passwordbotapp.com](http://passwordbotapp
 
 * [Why](#why)
 * [Score calculation](#score-calculation)
+* [Development](#development)
 * [Changelog](#changelog)
 * [License](#license)
 * [Credits](#credits)
@@ -33,6 +34,22 @@ Each character has the same weight.
 
 It is a basic way to calculate the password strength, but for now there are no unquestioned way to do so - [entropy calculation](https://en.wikipedia.org/wiki/Password_strength#Entropy_as_a_measure_of_password_strength) is one of the most discussed methods, but it is [not reliable in all cases](https://diogomonica.com/posts/password-security-why-the-horse-battery-staple-is-not-correct/), as it does not take the user behavior into account.
 
+# Development
+
+Checkout the project, then run:
+
+```bash
+$ npm install
+```
+
+and:
+
+```bash
+$ npm run watch:all
+```
+
+To minify the JS files and compile the SASS styles when a change occurs.
+
 ## Changelog
 
 | Version | Date | Notes |
@@ -49,3 +66,7 @@ This project is released under the [MIT License](license).
 ## Credits
 
 * [cookie.js](https://github.com/js-coder/cookie.js)
+* [chokidar](https://github.com/kimmobrunfeldt/chokidar-cli)
+* [node-sass](https://github.com/sass/node-sass)
+* [npm-run-all](https://github.com/mysticatea/npm-run-all)
+* [uglify-js](https://github.com/mishoo/UglifyJS2)

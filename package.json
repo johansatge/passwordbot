@@ -1,6 +1,16 @@
 {
-  "name": "",
+  "name": "PasswordBot",
   "scripts": {
-    "sass": "cd assets && compass watch sass/styles.scss"
+    "build:sass": "node-sass --output-style compressed -o assets/css assets/sass",
+    "watch:sass": "chokidar assets/sass/* -c 'npm run build:sass'",
+    "build:js": "uglifyjs --output assets/js/src.min.js assets/js/src/*.js",
+    "watch:js": "chokidar assets/js/**/* -c 'npm run build:js'",
+    "watch:all": "npm-run-all --parallel watch:sass watch:js"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0",
+    "node-sass": "^3.4.2",
+    "npm-run-all": "^1.5.1",
+    "uglify-js": "^2.6.1"
   }
 }
