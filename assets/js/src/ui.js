@@ -55,7 +55,14 @@
             user_value = cookie.get(cookie_prefix + input.getAttribute('name'), false);
             if (typeof user_value !== 'undefined')
             {
-                input.getAttribute('type') === 'checkbox' ? (input.checked = user_value === '1') : (input.value = user_value);
+                if (input.getAttribute('type') === 'checkbox')
+                {
+                    input.checked = user_value === '1';
+                }
+                else
+                {
+                    input.value = user_value;
+                }
                 loaded = true;
             }
         }

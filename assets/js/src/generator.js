@@ -10,15 +10,15 @@
         var charset = '';
         if (options.include_lowercase)
         {
-            charset += 'abcdefghijklmonpqrstuvwxyz';
+            charset += 'abcdefghijkmonpqrstuvwxyz' + (!options.avoid_similar ? 'l' : '');
         }
         if (options.include_uppercase)
         {
-            charset += 'ABCDEFGHIJKLMONPQRSTUVWXYZ';
+            charset += 'ABCDEFGHJKLMNPQRTUVWXYZ' + (!options.avoid_similar ? 'OSI' : '');
         }
         if (options.include_digits)
         {
-            charset += '0123456789';
+            charset += '2346789' + (!options.avoid_similar ? '015' : '');
         }
         if (options.include_special)
         {
