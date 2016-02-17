@@ -6,6 +6,7 @@ Simple password checker & generator - [passwordbotapp.com](http://passwordbotapp
 
 * [Why](#why)
 * [Score calculation](#score-calculation)
+* [About similar characters](#about-similar-characters)
 * [Development](#development)
 * [Changelog](#changelog)
 * [License](#license)
@@ -33,6 +34,14 @@ The score calculation is based on my own preferences: a 16-chars password made o
 Each character has the same weight.
 
 It is a basic way to calculate the password strength, but for now there are no unquestioned way to do so - [entropy calculation](https://en.wikipedia.org/wiki/Password_strength#Entropy_as_a_measure_of_password_strength) is one of the most discussed methods, but it is [not reliable in all cases](https://diogomonica.com/posts/password-security-why-the-horse-battery-staple-is-not-correct/), as it does not take the user behavior into account.
+
+# About similar characters
+
+The *avoid similar characaters* option, when enabled, removes the following when generating a password:
+
+* `l`, `I` and `1` (lowercase *L*, uppercase *i* and digit *one*)
+* `O` and `0` (uppercase *o* and digit *zero*)
+* `S` and `5` (uppercase *s* and digit *five*)
 
 ## Development
 

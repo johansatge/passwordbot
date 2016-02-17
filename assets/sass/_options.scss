@@ -7,6 +7,7 @@
 
     label
     {
+        position      : relative;
         cursor        : pointer;
         display       : block;
         border-bottom : 1px solid #e6e7eb;
@@ -66,6 +67,24 @@
             color       : #209ae1;
             top         : 3px;
             left        : 3px;
+        }
+    }
+
+    a,
+    a:visited
+    {
+        opacity         : 0.3;
+        position        : absolute;
+        top             : 8px;
+        right           : 8px;
+        font-size       : 18px;
+        color           : #868686;
+        text-decoration : none;
+        transition      : opacity 150ms;
+
+        &:hover
+        {
+            opacity : 1;
         }
     }
 }
