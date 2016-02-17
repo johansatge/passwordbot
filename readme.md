@@ -20,7 +20,7 @@ I wanted to make an online password generator, which would match those needs:
 * Minimalistic UI
 * No tracking at all
 * No ads
-* Understandable [generator function](assets/js/generator.js)
+* Understandable [generator function](assets/js/src/generator.js)
 
 ## Score calculation
 
@@ -35,9 +35,9 @@ Each character has the same weight.
 
 It is a basic way to calculate the password strength, but for now there are no unquestioned way to do so - [entropy calculation](https://en.wikipedia.org/wiki/Password_strength#Entropy_as_a_measure_of_password_strength) is one of the most discussed methods, but it is [not reliable in all cases](https://diogomonica.com/posts/password-security-why-the-horse-battery-staple-is-not-correct/), as it does not take the user behavior into account.
 
-# About similar characters
+## About similar characters
 
-The *avoid similar characaters* option, when enabled, removes the following when generating a password:
+The *avoid similar characters* option, when enabled, removes the following when generating a password:
 
 * `l`, `I` and `1` (lowercase *L*, uppercase *i* and digit *one*)
 * `O` and `0` (uppercase *o* and digit *zero*)
@@ -63,6 +63,7 @@ To minify the JS files and compile the SASS styles when a change occurs.
 
 | Version | Date | Notes |
 | --- | --- | --- |
+| `1.3.0` | February 17, 2016 | Responsive behavior |
 | `1.2.0` | December 22, 2015 | Responsive behavior |
 | `1.1.1` | August 26, 2015 | Fix cookie duration |
 | `1.1.0` | August 26, 2015 | Allows the user to save his options |
