@@ -63,11 +63,12 @@ To minify the JS files and compile the SASS styles when a change occurs.
 
 | Version | Date | Notes |
 | --- | --- | --- |
-| `1.3.0` | February 17, 2016 | Responsive behavior |
-| `1.2.0` | December 22, 2015 | Responsive behavior |
-| `1.1.1` | August 26, 2015 | Fix cookie duration |
-| `1.1.0` | August 26, 2015 | Allows the user to save his options |
-| `1.0.0` | August 23, 2015 | Initial version |
+| `1.3.1` | 2016-04-25 | Removes dependencies to CDNs |
+| `1.3.0` | 2016-02-17 | Adds *Avoid similar characters* option |
+| `1.2.0` | 2015-12-22 | Responsive behavior |
+| `1.1.1` | 2015-08-26 | Fix cookie duration |
+| `1.1.0` | 2015-08-26 | Allows the user to save his options |
+| `1.0.0` | 2015-08-23 | Initial version |
 
 ## License
 
