@@ -1,5 +1,6 @@
 {
   "name": "PasswordBot",
+  "private": true,
   "scripts": {
     "build:sass": "node-sass --output-style compressed -o assets/css assets/sass",
     "watch:sass": "chokidar assets/sass/* -c 'npm run build:sass'",
