@@ -54,10 +54,10 @@ $ npm install
 and:
 
 ```bash
-$ npm run watch:all
+$ npm run watch
 ```
 
-To minify the JS files and compile the SASS styles when a change occurs.
+To build the projet in `dist/` when a change occurs.
 
 ## Changelog
 
@@ -78,8 +78,12 @@ This project is released under the [MIT License](license.md).
 
 * [cookie.js](https://github.com/js-coder/cookie.js)
 * [chokidar](https://github.com/kimmobrunfeldt/chokidar-cli)
-* [node-sass](https://github.com/sass/node-sass)
-* [npm-run-all](https://github.com/mysticatea/npm-run-all)
-* [uglify-js](https://github.com/mishoo/UglifyJS2)
+* [ejs](http://ejs.co/)
 * [Font Awesome](http://fontawesome.io/)
+* [hasha](https://github.com/sindresorhus/hasha)
+* [html-minifier](https://github.com/kangax/html-minifier)
+* [ncp](https://github.com/AvianFlu/ncp)
+* [node-sass](https://github.com/sass/node-sass)
 * [Open Sans](http://www.opensans.com/)
+* [rimraf](https://github.com/isaacs/rimraf)
+* [uglify-js](https://github.com/mishoo/UglifyJS2)

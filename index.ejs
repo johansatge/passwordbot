@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PasswordBot - Simple password checker &amp; generator</title>
+    <link href="<%= cssFilename %>" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <h1>PasswordBot</h1>
+      <h2>
+        Simple password checker &amp; generator
+      </h2>
+      <h3>
+        <i class="fa fa-key"></i>
+      </h3>
+    </header>
+    <main>
+      <section class="password">
+        <input type="text" class="password js-input">
+        <div class="buttons">
+          <button class="js-generate">
+            <i class="fa fa-refresh"></i>
+            Generate
+          </button>
+        </div>
+      </section>
+      <section class="strength">
+        <table cellspacing="0" cellpadding="0">
+          <tr>
+            <td>Password length</td>
+            <td class="js-strength-length">0</td>
+          </tr>
+          <tr>
+            <td>Lowercase letters</td>
+            <td class="js-strength-lowercase">0</td>
+          </tr>
+          <tr>
+            <td>Uppercase letters</td>
+            <td class="js-strength-uppercase">0</td>
+          </tr>
+          <tr>
+            <td>Digits</td>
+            <td class="js-strength-digits">0</td>
+          </tr>
+          <tr>
+            <td>Special characters</td>
+            <td class="js-strength-specialchars">0</td>
+          </tr>
+          <tr>
+            <td>
+              Overall score
+              <a href="https://github.com/johansatge/passwordbot#score-calculation">
+                <i class="fa fa-question-circle"></i>
+              </a>
+            </td>
+            <td class="js-strength-score">0</td>
+          </tr>
+        </table>
+        <div class="bar">
+          <div class="content js-strength-score-bar" style="width: 0"></div>
+        </div>
+      </section>
+      <section class="options">
+        <label>
+          <input name="length" type="text" value="12" class="js-option" checked>
+          Characters
+        </label>
+        <label>
+          <input name="include_lowercase" type="checkbox" class="js-option" checked>
+          Include lowercase letters
+        </label>
+        <label>
+          <input name="include_uppercase" type="checkbox" class="js-option" checked>
+          Include uppercase letters
+        </label>
+        <label>
+          <input name="include_digits" type="checkbox" class="js-option" checked>
+          Include digits
+        </label>
+        <label>
+          <input name="include_special" type="checkbox" class="js-option" checked>
+          Include special characters
+        </label>
+        <label>
+          <input name="avoid_similar" type="checkbox" class="js-option" checked>
+          Avoid similar characters
+          <a href="https://github.com/johansatge/passwordbot#about-similar-characters">
+            <i class="fa fa-question-circle"></i>
+          </a>
+        </label>
+      </section>
+    </main>
+    <footer>
+      <button class="js-save">
+        Save options
+      </button>
+      <span class="message js-save-message" data-msg-save="Options saved" data-msg-load="Options loaded"></span>
+      Project available on <a href="https://github.com/johansatge/passwordbot">Github</a>
+    </footer>
+    <script src="<%= jsFilename %>"></script>
+    <script>
+      window.onload = UI.init;
+    </script>
+  </body>
+</html>
