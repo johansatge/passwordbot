@@ -72,7 +72,7 @@ To minify the JS files and compile the SASS styles when a change occurs.
 
 ## License
 
-This project is released under the [MIT License](license).
+This project is released under the [MIT License](license.md).
 
 ## Credits
 

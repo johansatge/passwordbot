@@ -6,7 +6,8 @@
     "watch:sass": "chokidar assets/sass/* -c 'npm run build:sass'",
     "build:js": "uglifyjs --output assets/js/src.min.js assets/js/src/*.js",
     "watch:js": "chokidar assets/js/**/* -c 'npm run build:js'",
-    "watch:all": "npm-run-all --parallel watch:sass watch:js"
+    "watch:all": "npm-run-all --parallel watch:sass watch:js",
+    "deploy": "s3cmd sync ./ s3://passwordbotapp.com/ --recursive --delete-removed --exclude-from=.s3ignore --acl-public --cf-invalidate --cf-invalidate-default-index"
   },
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
