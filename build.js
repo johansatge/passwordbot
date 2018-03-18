@@ -46,12 +46,12 @@ function buildCSS() {
 function buildJS() {
   console.log('Building JS')
   return new Promise((resolve, reject) => {
-    const result = UglifyJS.minify([
-      'assets/js/cookie.min.js',
-      'assets/js/generator.js',
-      'assets/js/score.js',
-      'assets/js/ui.js',
-    ])
+    const result = UglifyJS.minify({
+      cookie : fs.readFileSync('assets/js/cookie.min.js', 'utf8'),
+      generator : fs.readFileSync('assets/js/generator.js', 'utf8'),
+      score : fs.readFileSync('assets/js/score.js', 'utf8'),
+      ui : fs.readFileSync('assets/js/ui.js', 'utf8'),
+    })
     fs.writeFile('dist/scripts.js', result.code, (error) => {
       if (error) {
         reject(error)

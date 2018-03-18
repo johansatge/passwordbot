@@ -3,19 +3,16 @@
   "private": true,
   "scripts": {
     "watch": "chokidar assets/**/* -c 'npm run build'",
-    "build": "node build.js",
-    "deploy:assets": "s3cmd sync ./dist/ s3://passwordbotapp.com/ --recursive --delete-removed --exclude=.DS_Store --exclude=index.html --add-header='Cache-Control: max-age=2592000, public'",
-    "deploy:index": "s3cmd sync ./dist/index.html s3://passwordbotapp.com/ --cf-invalidate --cf-invalidate-default-index --add-header='Cache-Control: max-age=600, public'",
-    "deploy": "node build.js && npm run deploy:assets && npm run deploy:index"
+    "build": "node build.js"
   },
   "dependencies": {
     "chokidar-cli": "^1.2.0",
-    "ejs": "^2.5.6",
-    "hasha": "^2.2.0",
-    "html-minifier": "^3.4.2",
+    "ejs": "^2.5.7",
+    "hasha": "^3.0.0",
+    "html-minifier": "^3.5.11",
     "ncp": "^2.0.0",
-    "node-sass": "^4.5.2",
-    "rimraf": "^2.6.1",
-    "uglify-js": "^2.8.21"
+    "node-sass": "^4.7.2",
+    "rimraf": "^2.6.2",
+    "uglify-js": "^3.3.15"
   }
 }
