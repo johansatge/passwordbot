@@ -1,4 +1,3 @@
-const sass     = require('node-sass')
 const UglifyJS = require('uglify-js')
 const minify   = require('html-minifier').minify
 const fs       = require('fs')
@@ -21,15 +20,14 @@ prepareDist().then(() => {
 function buildCSS() {
   console.log('Building CSS')
   return new Promise((resolve, reject) => {
-    const css = sass.render({
-      file: 'assets/sass/styles.scss',
-      outputStyle: 'compressed',
-    }, (error, result) => {
+    fs.readFile('assets/styles.css', 'utf8', (error, css) => {
       if (error) {
         reject(error)
         return
       }
-      fs.writeFile('dist/styles.css', result.css.toString(), (error) => {
+      css = css.replace(/\n/g, ' ')
+      css = css.replace(/ {2,}/g, '')
+      fs.writeFile('dist/styles.css', css, (error) => {
         if (error) {
           reject(error)
           return
