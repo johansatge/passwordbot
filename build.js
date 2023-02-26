@@ -1,7 +1,6 @@
 const UglifyJS = require('uglify-js')
 const minify   = require('html-minifier').minify
 const fs       = require('fs')
-const ejs      = require('ejs')
 const ncp      = require('ncp')
 const rimraf   = require('rimraf')
 const crypto = require('crypto')
@@ -51,29 +50,23 @@ function buildJS() {
   })
 }
 
-function buildHTML(cssFilename, jsFilename) {
+async function buildHTML(cssFilename, jsFilename) {
   console.log('Building HTML')
-  return new Promise((resolve, reject) => {
-    const indexTemplate = fs.readFileSync('index.ejs', 'utf8')
-    const html = ejs.render(indexTemplate, {
-      cssFilename : cssFilename,
-      jsFilename  : jsFilename,
-    })
-    const minifiedHTML = minify(html, {
-      caseSensitive              : true,
-      collapseWhitespace         : true,
-      conservativeCollapse       : true,
-      html5                      : true,
-      removeAttributeQuotes      : false,
-      removeComments             : true,
-      removeEmptyAttributes      : true,
-      removeScriptTypeAttributes : true,
-      useShortDoctype            : true,
-    })
-    fs.writeFile('dist/index.html', minifiedHTML, (error) => {
-      error ? reject(error) : resolve(html)
-    })
+  let html = await fsp.readFile('index.html', 'utf8')
+  html = html.replaceAll('__cssFilename__', cssFilename)
+  html = html.replaceAll('__jsFilename__', jsFilename)
+  const minifiedHTML = minify(html, {
+    caseSensitive              : true,
+    collapseWhitespace         : true,
+    conservativeCollapse       : true,
+    html5                      : true,
+    removeAttributeQuotes      : false,
+    removeComments             : true,
+    removeEmptyAttributes      : true,
+    removeScriptTypeAttributes : true,
+    useShortDoctype            : true,
   })
+  await fsp.writeFile(path.join(__dirname, 'dist/index.html'), minifiedHTML)
 }
 
 function prepareDist() {
