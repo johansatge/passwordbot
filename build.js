@@ -1,8 +1,8 @@
 const UglifyJS = require('uglify-js')
-const fs       = require('fs')
-const crypto = require('crypto')
-const fsp = require('fs').promises
-const path = require('path')
+const fs       = require('node:fs')
+const crypto = require('node:crypto')
+const fsp = require('node:fs').promises
+const path = require('node:path')
 const httpdir = require('/usr/local/lib/node_modules/httpdir')
 
 const srcPath = path.join(__dirname, 'src')
@@ -61,7 +61,6 @@ function buildJS() {
   console.log('Building JS')
   return new Promise((resolve, reject) => {
     const result = UglifyJS.minify({
-      cookie : fs.readFileSync('src/js/cookie.min.js', 'utf8'),
       generator : fs.readFileSync('src/js/generator.js', 'utf8'),
       score : fs.readFileSync('src/js/score.js', 'utf8'),
       ui : fs.readFileSync('src/js/ui.js', 'utf8'),

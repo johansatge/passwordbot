@@ -1,12 +1,10 @@
-(function(window, document, cookie)
+(function(window, document)
 {
 
     'use strict';
 
     var module = {};
     var dom = {};
-    var cookie_prefix = 'pwb_';
-    var cookie_duration = 365;
 
     module.init = function()
     {
@@ -40,20 +38,14 @@
 
     var _initOptions = function()
     {
-        if (!cookie.enabled)
-        {
-            dom.saveButton.parentNode.removeChild(dom.saveButton);
-            dom.saveMessage.parentNode.removeChild(dom.saveMessage);
-            return;
-        }
         var user_value;
         var input;
         var loaded = false;
         for (var index = 0; index < dom.options.length; index += 1)
         {
             input = dom.options[index];
-            user_value = cookie.get(cookie_prefix + input.getAttribute('name'), false);
-            if (typeof user_value !== 'undefined')
+            user_value = localStorage.getItem('pwb_' + input.getAttribute('name'));
+            if (user_value !== null)
             {
                 if (input.getAttribute('type') === 'checkbox')
                 {
@@ -99,7 +91,7 @@
         var options = _parseOptions();
         for (var option in options)
         {
-            cookie.set(cookie_prefix + option, options[option], {expires: cookie_duration});
+            localStorage.setItem('pwb_' + option, options[option]);
         }
         dom.saveMessage.innerHTML = dom.saveMessage.getAttribute('data-msg-save');
     };
@@ -117,4 +109,4 @@
 
     window.UI = module;
 
-})(window, document, cookie);
+})(window, document);
