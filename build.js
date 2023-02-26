@@ -2,9 +2,9 @@ const UglifyJS = require('uglify-js')
 const minify   = require('html-minifier').minify
 const fs       = require('fs')
 const ejs      = require('ejs')
-const hasha    = require('hasha')
 const ncp      = require('ncp')
 const rimraf   = require('rimraf')
+const crypto = require('crypto')
 
 prepareDist().then(() => {
   Promise.all([copyAssets(), buildCSS(), buildJS()])
@@ -32,10 +32,9 @@ function buildCSS() {
           reject(error)
           return
         }
-        hasha.fromFile('dist/styles.css', {algorithm: 'md5'}).then((hash) => {
-          fs.renameSync('dist/styles.css', 'dist/styles.' + hash + '.css')
-          resolve('styles.' + hash + '.css')
-        })
+        const hash = crypto.createHash('sha1').update(css).digest('hex')
+        fs.renameSync('dist/styles.css', 'dist/styles.' + hash + '.css')
+        resolve('styles.' + hash + '.css')
       })
     })
   })
@@ -55,10 +54,9 @@ function buildJS() {
         reject(error)
         return
       }
-      hasha.fromFile('dist/scripts.js', {algorithm: 'md5'}).then((hash) => {
-        fs.renameSync('dist/scripts.js', 'dist/scripts.' + hash + '.js')
-        resolve('scripts.' + hash + '.js')
-      })
+      const hash = crypto.createHash('sha1').update(result.code).digest('hex')
+      fs.renameSync('dist/scripts.js', 'dist/scripts.' + hash + '.js')
+      resolve('scripts.' + hash + '.js')
     })
   })
 }
