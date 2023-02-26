@@ -5,6 +5,8 @@ const ejs      = require('ejs')
 const ncp      = require('ncp')
 const rimraf   = require('rimraf')
 const crypto = require('crypto')
+const fsp = require('fs').promises
+const path = require('path')
 
 prepareDist().then(() => {
   Promise.all([copyAssets(), buildCSS(), buildJS()])
@@ -17,27 +19,15 @@ prepareDist().then(() => {
     })
 })
 
-function buildCSS() {
+async function buildCSS() {
   console.log('Building CSS')
-  return new Promise((resolve, reject) => {
-    fs.readFile('assets/styles.css', 'utf8', (error, css) => {
-      if (error) {
-        reject(error)
-        return
-      }
-      css = css.replace(/\n/g, ' ')
-      css = css.replace(/ {2,}/g, '')
-      fs.writeFile('dist/styles.css', css, (error) => {
-        if (error) {
-          reject(error)
-          return
-        }
-        const hash = crypto.createHash('sha1').update(css).digest('hex')
-        fs.renameSync('dist/styles.css', 'dist/styles.' + hash + '.css')
-        resolve('styles.' + hash + '.css')
-      })
-    })
-  })
+  let css = await fsp.readFile('assets/styles.css', 'utf8')
+  css = css.replace(/\n/g, ' ')
+  css = css.replace(/ {2,}/g, '')
+  const hash = crypto.createHash('sha1').update(css).digest('hex')
+  const filename = `styles.${hash}.css`
+  await fsp.writeFile(path.join(__dirname, 'dist', filename), css)
+  return filename
 }
 
 function buildJS() {
