@@ -1,30 +1,60 @@
 const UglifyJS = require('uglify-js')
 const fs       = require('fs')
 const ncp      = require('ncp')
-const rimraf   = require('rimraf')
 const crypto = require('crypto')
 const fsp = require('fs').promises
 const path = require('path')
+const httpdir = require('/usr/local/lib/node_modules/httpdir')
 
-prepareDist().then(() => {
-  Promise.all([copyAssets(), buildCSS(), buildJS()])
-    .then(([assets, css, js]) => {
-      buildHTML(css, js).then(() => console.log('Built.'))
-    })
-    .catch((error) => {
-      console.error(error)
-      process.exit(1)
-    })
-})
+const srcPath = path.join(__dirname, 'src')
+const distPath = path.join(__dirname, 'dist')
+
+build()
+if (process.argv.includes('--watch')) {
+  const server = httpdir.createServer({ basePath: 'dist', httpPort: 9293 })
+  server.onStart(({ urls }) => {
+    console.log(urls.join('\n'))
+  })
+  server.start()
+  buildOnChange()
+}
+
+async function build() {
+  const startMs = Date.now()
+  try {
+    await copyAssets()
+    const css = await buildCSS()
+    const js = await buildJS()
+    await buildHTML(css, js)
+    console.log(`Built (${Date.now() - startMs}ms)`)
+  } catch (error) {
+    console.log(`Build error: ${error.message} (${error.stack})`)
+  }
+}
+
+async function buildOnChange() {
+  console.log(`Watching ${srcPath}`)
+  fs.watch(srcPath, { recursive: true }, (evtType, file) => {
+    console.log(`Event ${evtType} on ${file}, building...`)
+    build()
+  })
+}
+
+async function makeDist() {
+  try {
+    await fsp.rm(distPath, { recursive: true })
+  } catch(error) {}
+  await fsp.mkdir(distPath, { recursive: true })
+}
 
 async function buildCSS() {
   console.log('Building CSS')
-  let css = await fsp.readFile('assets/styles.css', 'utf8')
+  let css = await fsp.readFile(path.join(srcPath, 'styles.css'), 'utf8')
   css = css.replace(/\n/g, ' ')
   css = css.replace(/ {2,}/g, '')
   const hash = crypto.createHash('sha1').update(css).digest('hex')
   const filename = `styles.${hash}.css`
-  await fsp.writeFile(path.join(__dirname, 'dist', filename), css)
+  await fsp.writeFile(path.join(distPath, filename), css)
   return filename
 }
 
@@ -32,10 +62,10 @@ function buildJS() {
   console.log('Building JS')
   return new Promise((resolve, reject) => {
     const result = UglifyJS.minify({
-      cookie : fs.readFileSync('assets/js/cookie.min.js', 'utf8'),
-      generator : fs.readFileSync('assets/js/generator.js', 'utf8'),
-      score : fs.readFileSync('assets/js/score.js', 'utf8'),
-      ui : fs.readFileSync('assets/js/ui.js', 'utf8'),
+      cookie : fs.readFileSync('src/js/cookie.min.js', 'utf8'),
+      generator : fs.readFileSync('src/js/generator.js', 'utf8'),
+      score : fs.readFileSync('src/js/score.js', 'utf8'),
+      ui : fs.readFileSync('src/js/ui.js', 'utf8'),
     })
     fs.writeFile('dist/scripts.js', result.code, (error) => {
       if (error) {
@@ -51,30 +81,17 @@ function buildJS() {
 
 async function buildHTML(cssFilename, jsFilename) {
   console.log('Building HTML')
-  let html = await fsp.readFile('index.html', 'utf8')
+  let html = await fsp.readFile(path.join(srcPath, 'index.html'), 'utf8')
   html = html.replaceAll('__cssFilename__', cssFilename)
   html = html.replaceAll('__jsFilename__', jsFilename)
   html = html.replace(/ {2,}/g, '')
-  await fsp.writeFile(path.join(__dirname, 'dist/index.html'), html)
-}
-
-function prepareDist() {
-  console.log('Cleaning dist')
-  return new Promise((resolve, reject) => {
-    rimraf('dist', (error) => {
-      if (error) {
-        reject(error)
-        return
-      }
-      fs.mkdir('dist', resolve)
-    })
-  })
+  await fsp.writeFile(path.join(distPath, 'index.html'), html)
 }
 
 function copyAssets() {
   console.log('Copying assets')
   return new Promise((resolve, reject) => {
-    copyDir('assets/fonts', 'dist/fonts').then(copyDir('assets/images', 'dist/images')).then(resolve)
+    copyDir('src/fonts', 'dist/fonts').then(copyDir('src/images', 'src/images')).then(resolve)
   })
 }
 
