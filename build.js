@@ -1,5 +1,4 @@
 const UglifyJS = require('uglify-js')
-const minify   = require('html-minifier').minify
 const fs       = require('fs')
 const ncp      = require('ncp')
 const rimraf   = require('rimraf')
@@ -55,18 +54,8 @@ async function buildHTML(cssFilename, jsFilename) {
   let html = await fsp.readFile('index.html', 'utf8')
   html = html.replaceAll('__cssFilename__', cssFilename)
   html = html.replaceAll('__jsFilename__', jsFilename)
-  const minifiedHTML = minify(html, {
-    caseSensitive              : true,
-    collapseWhitespace         : true,
-    conservativeCollapse       : true,
-    html5                      : true,
-    removeAttributeQuotes      : false,
-    removeComments             : true,
-    removeEmptyAttributes      : true,
-    removeScriptTypeAttributes : true,
-    useShortDoctype            : true,
-  })
-  await fsp.writeFile(path.join(__dirname, 'dist/index.html'), minifiedHTML)
+  html = html.replace(/ {2,}/g, '')
+  await fsp.writeFile(path.join(__dirname, 'dist/index.html'), html)
 }
 
 function prepareDist() {
