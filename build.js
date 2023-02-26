@@ -21,6 +21,7 @@ if (process.argv.includes('--watch')) {
 async function build() {
   const startMs = Date.now()
   try {
+    await makeDist()
     await copyAssets()
     const css = await buildCSS()
     const js = await buildJS()
@@ -42,7 +43,7 @@ async function buildOnChange() {
 async function makeDist() {
   try {
     await fsp.rm(distPath, { recursive: true })
-  } catch(error) {}
+  } catch(error) { }
   await fsp.mkdir(distPath, { recursive: true })
 }
 
@@ -85,7 +86,6 @@ async function buildHTML(cssFilename, jsFilename) {
 
 async function copyAssets() {
   console.log('Copying assets')
-  const src = path.join(srcPath, 'fonts')
-  const dest = path.join(distPath, 'fonts')
-  await fsp.cp(src, dest, { recursive: true })
+  await fsp.cp(path.join(srcPath, 'fonts'), path.join(distPath, 'fonts'), { recursive: true })
+  await fsp.cp(path.join(srcPath, 'favicon.png'), path.join(distPath, 'favicon.png'), { recursive: true })
 }
