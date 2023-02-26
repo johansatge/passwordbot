@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "chokidar-cli": "^1.2.0",
-    "uglify-js": "^3.3.15"
+    "esbuild": "^0.17.10"
   }
 }

@@ -1,74 +1,44 @@
-(function(window)
-{
+export function generatePassword(options) {
+  let charset = ''
+  if (options.include_lowercase) {
+    charset += 'abcdefghijkmonpqrstuvwxyz' + (!options.avoid_similar ? 'l' : '')
+  }
+  if (options.include_uppercase) {
+    charset += 'ABCDEFGHJKLMNPQRTUVWXYZ' + (!options.avoid_similar ? 'OSI' : '')
+  }
+  if (options.include_digits) {
+    charset += '2346789' + (!options.avoid_similar ? '015' : '')
+  }
+  if (options.include_special) {
+    charset += '#@&"\'(!)°-_^*$%+=:/.;,?<>'
+  }
+  let password = ''
+  if (charset.length > 0) {
+    for (let char = 0; char < options.length; char += 1) {
+      password += charset[getRandomPosition(charset.length - 1)]
+    }
+  }
+  return password
+}
 
-    'use strict';
+export function getPasswordInformations(password) {
+  return {
+    length: password.length,
+    lowercase: getCharactersCount(/[a-z]/g, password),
+    uppercase: getCharactersCount(/[A-Z]/g, password),
+    digits: getCharactersCount(/[0-9]/g, password),
+    special: getCharactersCount(/[^a-zA-Z0-9]/g, password),
+  }
+}
 
-    var module = {};
+function getCharactersCount(regex, subject) {
+  const matches = subject.match(regex)
+  return matches !== null ? matches.length : 0
+}
 
-    module.generatePassword = function(options)
-    {
-        var charset = '';
-        if (options.include_lowercase)
-        {
-            charset += 'abcdefghijkmonpqrstuvwxyz' + (!options.avoid_similar ? 'l' : '');
-        }
-        if (options.include_uppercase)
-        {
-            charset += 'ABCDEFGHJKLMNPQRTUVWXYZ' + (!options.avoid_similar ? 'OSI' : '');
-        }
-        if (options.include_digits)
-        {
-            charset += '2346789' + (!options.avoid_similar ? '015' : '');
-        }
-        if (options.include_special)
-        {
-            charset += '#@&"\'(!)°-_^*$%+=:/.;,?<>';
-        }
-        var password = '';
-        if (charset.length > 0)
-        {
-            for (var char = 0; char < options.length; char += 1)
-            {
-                password += charset[_getRandomPosition(charset.length - 1)];
-            }
-        }
-        return password;
-    };
-
-    module.getPasswordInformations = function(password)
-    {
-        return {
-            length: password.length,
-            lowercase: _getCharactersCount(/[a-z]/g, password),
-            uppercase: _getCharactersCount(/[A-Z]/g, password),
-            digits: _getCharactersCount(/[0-9]/g, password),
-            special: _getCharactersCount(/[^a-zA-Z0-9]/g, password)
-        };
-    };
-
-    var _getCharactersCount = function(regex, subject)
-    {
-        var matches = subject.match(regex);
-        return matches !== null ? matches.length : 0;
-    };
-
-    var _getRandomPosition = function(max)
-    {
-        var random;
-        var max_random = 256 * 256;
-        if (window.crypto && window.crypto.getRandomValues)
-        {
-            var byte_array = new Uint16Array(1);
-            window.crypto.getRandomValues(byte_array);
-            random = byte_array[0];
-        }
-        else
-        {
-            random = Math.floor(Math.random() * (max_random - 1));
-        }
-        return Math.floor((random * (max - 1)) / max_random);
-    };
-
-    window.Generator = module;
-
-})(window);
+function getRandomPosition(max) {
+  const maxRandom = 256 * 256
+  const byteArray = new Uint16Array(1)
+  window.crypto.getRandomValues(byteArray)
+  return Math.floor((byteArray[0] * (max - 1)) / maxRandom)
+}

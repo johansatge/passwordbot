@@ -1,8 +1,8 @@
-const UglifyJS = require('uglify-js')
-const fs       = require('node:fs')
+const fs = require('node:fs')
 const crypto = require('node:crypto')
 const fsp = require('node:fs').promises
 const path = require('node:path')
+const esbuild = require('esbuild')
 const httpdir = require('/usr/local/lib/node_modules/httpdir')
 
 const srcPath = path.join(__dirname, 'src')
@@ -57,24 +57,21 @@ async function buildCSS() {
   return filename
 }
 
-function buildJS() {
+async function buildJS() {
   console.log('Building JS')
-  return new Promise((resolve, reject) => {
-    const result = UglifyJS.minify({
-      generator : fs.readFileSync('src/js/generator.js', 'utf8'),
-      score : fs.readFileSync('src/js/score.js', 'utf8'),
-      ui : fs.readFileSync('src/js/ui.js', 'utf8'),
-    })
-    fs.writeFile('dist/scripts.js', result.code, (error) => {
-      if (error) {
-        reject(error)
-        return
-      }
-      const hash = crypto.createHash('sha1').update(result.code).digest('hex')
-      fs.renameSync('dist/scripts.js', 'dist/scripts.' + hash + '.js')
-      resolve('scripts.' + hash + '.js')
-    })
+  const result = await esbuild.build({
+    entryPoints: [path.join(srcPath, 'js/ui.js')],
+    bundle: true,
+    minify: true,
+    entryNames: '[name].[hash]',
+    outdir: distPath,
+    metafile: true,
   })
+  if (result.errors.length > 0) {
+    throw new Error(result.errors[0])
+  }
+  const assets = Object.keys(result.metafile.outputs)
+  return path.parse(assets[0]).base
 }
 
 async function buildHTML(cssFilename, jsFilename) {
