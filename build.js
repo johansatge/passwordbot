@@ -3,13 +3,13 @@ const crypto = require('node:crypto')
 const fsp = require('node:fs').promises
 const path = require('node:path')
 const esbuild = require('esbuild')
-const httpdir = require('/usr/local/lib/node_modules/httpdir')
 
 const srcPath = path.join(__dirname, 'src')
 const distPath = path.join(__dirname, 'dist')
 
 build()
 if (process.argv.includes('--watch')) {
+  const httpdir = require('/usr/local/lib/node_modules/httpdir')
   const server = httpdir.createServer({ basePath: 'dist', httpPort: 9293 })
   server.onStart(({ urls }) => {
     console.log(urls.join('\n'))
