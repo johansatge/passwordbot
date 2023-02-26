@@ -63,6 +63,7 @@ To build the projet in `dist/` when a change occurs.
 
 | Version | Date | Notes |
 | --- | --- | --- |
+| `1.3.2` | 2022-02-26 | Revamp build & move to ES6 |
 | `1.3.1` | 2016-04-25 | Removes dependencies to CDNs |
 | `1.3.0` | 2016-02-17 | Adds *Avoid similar characters* option |
 | `1.2.0` | 2015-12-22 | Responsive behavior |
