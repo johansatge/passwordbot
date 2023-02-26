@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "chokidar-cli": "^1.2.0",
-    "ncp": "^2.0.0",
     "uglify-js": "^3.3.15"
   }
 }

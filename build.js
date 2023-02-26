@@ -1,6 +1,5 @@
 const UglifyJS = require('uglify-js')
 const fs       = require('fs')
-const ncp      = require('ncp')
 const crypto = require('crypto')
 const fsp = require('fs').promises
 const path = require('path')
@@ -88,17 +87,9 @@ async function buildHTML(cssFilename, jsFilename) {
   await fsp.writeFile(path.join(distPath, 'index.html'), html)
 }
 
-function copyAssets() {
+async function copyAssets() {
   console.log('Copying assets')
-  return new Promise((resolve, reject) => {
-    copyDir('src/fonts', 'dist/fonts').then(copyDir('src/images', 'src/images')).then(resolve)
-  })
-}
-
-function copyDir(source, destination) {
-  return new Promise((resolve, reject) => {
-    ncp(source, destination, (error) => {
-      resolve()
-    })
-  })
+  const src = path.join(srcPath, 'fonts')
+  const dest = path.join(distPath, 'fonts')
+  await fsp.cp(src, dest, { recursive: true })
 }
