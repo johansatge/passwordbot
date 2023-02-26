@@ -2,11 +2,9 @@
   "name": "PasswordBot",
   "private": true,
   "scripts": {
-    "watch": "chokidar assets/**/* -c 'npm run build'",
     "build": "node build.js"
   },
   "dependencies": {
-    "chokidar-cli": "^1.2.0",
     "esbuild": "^0.17.10"
   }
 }
