@@ -26,6 +26,7 @@ async function build() {
     const css = await buildCSS()
     const js = await buildJS()
     await buildHTML(css, js)
+    await fsp.copyFile(path.join(__dirname, '_headers'), path.join(distPath, '_headers'))
     console.log(`Built (${Date.now() - startMs}ms)`)
   } catch (error) {
     console.log(`Build error: ${error.message} (${error.stack})`)
